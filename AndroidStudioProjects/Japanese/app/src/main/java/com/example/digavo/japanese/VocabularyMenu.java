@@ -21,7 +21,6 @@ public class VocabularyMenu extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         theme = sharedPref.getString("appTheme", "");
         color = sharedPref.getString("appColor", "");
-        Log.i("MIAN_restart",theme+" + "+color);
         if(theme.compareTo("1")==0 && color.compareTo("1")==0)
             setTheme(R.style.LightOrange);
         else if(theme.compareTo("2")==0 && color.compareTo("1")==0)
@@ -37,6 +36,8 @@ public class VocabularyMenu extends AppCompatActivity {
         //PreferenceManager.setDefaultValues(this, R.xml.options, false);
 
         // ------- Buttons --------------
+        ((Button)findViewById(R.id.btTest)).setOnClickListener(testClick);
+
         ((Button)findViewById(R.id.bt3)).setOnClickListener(categoryClick);
         ((Button)findViewById(R.id.bt4)).setOnClickListener(categoryClick);
         ((Button)findViewById(R.id.bt5)).setOnClickListener(categoryClick);
@@ -80,6 +81,15 @@ public class VocabularyMenu extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    View.OnClickListener testClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent showIntent = new Intent(VocabularyMenu.this, ActivityVocabularyTest.class);
+            //Bundle myDataBundle = new Bundle();
+            //myDataBundle.putString("category",tag);
+            //showIntent.putExtras(myDataBundle);
+            startActivity(showIntent);
+        }
+    };
     View.OnClickListener categoryClick = new View.OnClickListener() {
         public void onClick(View v) {
             String tag = "";
@@ -93,25 +103,6 @@ public class VocabularyMenu extends AppCompatActivity {
             if (tag=="") return;
 
             Intent showIntent = new Intent(VocabularyMenu.this, ActivityWords.class);
-            Bundle myDataBundle = new Bundle();
-            myDataBundle.putString("category",tag);
-            showIntent.putExtras(myDataBundle);
-            startActivity(showIntent);
-        }
-    };
-    View.OnClickListener grammarClick = new View.OnClickListener() {
-        public void onClick(View v) {
-            String tag = "";
-            try{
-                tag=v.getTag().toString();
-            }
-            catch (Exception ex){
-                Log.i("BUTTON",ex.toString());
-                return;
-            }
-            if (tag.equals("")) return;
-
-            Intent showIntent = new Intent(VocabularyMenu.this, ActivityGrammar.class);
             Bundle myDataBundle = new Bundle();
             myDataBundle.putString("category",tag);
             showIntent.putExtras(myDataBundle);

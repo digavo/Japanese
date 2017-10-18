@@ -188,7 +188,7 @@ public class ActivityWords extends AppCompatActivity {
         String theme2 = sharedPref.getString("appTheme", "");
         String color2 = sharedPref.getString("appColor", "");
         String letters2 = sharedPref.getString("appLetter", "");
-        if (theme2 != theme || color2 != color || letters2 != letters)
+        if (!theme2.equals(theme) || !color2.equals(color) || !letters2.equals(letters))
             recreate();
     }
 }

@@ -81,56 +81,58 @@ public class ActivityGrammar extends AppCompatActivity {
             case "Sentences":
                 title.setText("Example Sentences");
                 text2.setWidth(0);
-                text1.setText("X is y?\nX wa Y des ka?\n\n"+
+                text1.setText("X is Y\nX wa Y des.\n\n"+
+                        "X is y?\nX wa Y des ka?\n\n"+
                         "X isn’t Y\nX wa Y dewa arimasen.\n\n"+
                         "This is my pen\nKore wa watashi no pen des.\n\n"+
-                        "Our book is this?\nWatashitachi no hon wa kore des ka?\n\n"+
+                        "Our book is this\nWatashitachi no hon wa kore des.\n\n"+
+                        "This is our book\nKore wa watashitachi no hon des.\n\n"+
                         "You are person from which country?\nAnata wa dochira no kuni no kata des ka?\n\n"+
                         "I am from Poland (Poland person)\nWatashi wa po-rando no hito des.\n\n"+
-                        "Your country is where?\nAnata no kuni wa doko des ka?\n\n"+
+                        "Where is your country?\nAnata no kuni wa doko des ka?\n\n"+
                         "My country is Poland\nWatashi no kuni wa po-rando des.\n\n"+
                         "I am Spanish\nWatashi wa speinjin des.\n\n"+
-                        "You are who?\nAnata wa dare des ka?\n\n"+
+                        "Who are you?\nAnata wa dare des ka?\n\n"+
                         "Your shoe is this or that? Which one?\nAnata no kucu wa kore des ka? Soretomo sore des ka? Dochira des ka?\n\n"+
                         "This book is whose book?\nSono hon wa dare no hon des ka?\n\n"+
                         "Now time is what hour what minute? \nIma jikan wa nan-ji nan pun des ka?\n\n"+
 
-                        "Your house is where?\nAnata no ie wa doko ni arimas ka?\n\n"+
-                        "Your cat is where?\nAnata no neko wa doko ni imas ka?\n\n"+
+                        "Where is your house?\nAnata no ie wa doko ni arimas ka?\n\n"+
+                        "Where is your cat?\nAnata no neko wa doko ni imas ka?\n\n"+
                         "Your cat isn’t in house\nAnata no neko wa ie niwa imasen\n\n"+
                         "Glasses are next to what?\nMegane wa nan no yoko ni arimas ka?\n\n"+
                         "Glasses are where in room?\nMegane wa heya no doko ni arimas ka?\n\n"+
-                        "No, my house isn’t at x\nIie, watashi no ie wa x niwa arimasen.\n\n"+
+                        "No, my house isn’t at X\nIie, watashi no ie wa X niwa arimasen.\n\n"+
                         "What is there? \nNani ga soko ni arimas ka?\n\n"+
 
-                        "I am going to x\nWatashi wa x ni ikimas.\n\n"+
-                        "I am not going to x\nWatashi wa x niwa ikimasen.\n\n"+
-                        "You are going back to house?\nAnata wa ie ni kaerimas ka?\n\n"+
+                        "I am going to X\nWatashi wa X ni ikimas.\n\n"+
+                        "I am not going to X\nWatashi wa X niwa ikimasen.\n\n"+
+                        "Are you going back to house?\nAnata wa ie ni kaerimas ka?\n\n"+
                         "I come to house by foot\nWatashi wa ie made ashi de ikimas.\n\n"+
                         "Mother and you go when to shop?\nAnata to haha wa icu kaimono ni ikimas ka? \n\n"+
-                        "also I go to school\nWatashi mo gakkou ni ikimas.\n\n"+
+                        "Also I go to school\nWatashi mo gakkou ni ikimas.\n\n"+
                         "I go also to school \nWatashi wa gakkou nimo ikimas.\n\n"+
                         "Who goes to shop?\nDare ga mise ni ikimas ka?\n\n"+
                         "My friend goes also where?\nWatashi no tomodachi wa doko nimo ikimasen ka?\n\n"+
 
                         "Today I swim in swimming pool\nKyou watashi wa suiei o pu-ru de shimas\n\n"+
-                        "You are from now what doing?\nAnata wa korekara nani o shimas ka?\n\n"+
+                        "What are you doing from now ?\nAnata wa korekara nani o shimas ka?\n\n"+
                         "I do studying at school\nWatashi wa gakkou de benkyou o shimas.\n\n"+
                         "No, I don’t drive car\nIie, watashi wa kuruma no unten wa shimasen.\n\n"+
-                        "You with who do shopping?\nAnata wa dare to kaimono o shimas ka?\n\n"+
+                        "With whom you do shopping?\nAnata wa dare to kaimono o shimas ka?\n\n"+
                         "I do studying also at school \nWatashi wa gakkou demo benkyou o shimas.\n\n"+
                         "I also do studying at school\nWatashi wa gakkou de benkyou mo shimas.\n\n"+
                         "I don’t do anything\nWatashi wa nani mo shimasen.\n\n");
                 break;
             case "Hiragana":
-                title.setText("Practice writing ->");
-                title.setOnClickListener(new View.OnClickListener() {
+                title.setText("Hiragana");
+                /*title.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent testIntent = new Intent(ActivityGrammar.this, ActivityTest.class);
                         startActivityForResult(testIntent, 20);
                     }
-                });
+                });*/
                 int h1Size = 0, h2Size = 0, h3Size = 0, h4Size = 0;
                 // DATABASE ---------
                 DataBaseHelper myDbHelper = new DataBaseHelper(ActivityGrammar.this);
@@ -373,7 +375,7 @@ public class ActivityGrammar extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String theme2 = sharedPref.getString("appTheme", "");
         String color2 = sharedPref.getString("appColor", "");
-        if (theme2 != theme || color2 != color)
+        if (!theme2.equals(theme) || !color2.equals(color))
             recreate();
     }
 }

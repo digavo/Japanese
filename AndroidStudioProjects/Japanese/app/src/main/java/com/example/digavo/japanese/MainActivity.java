@@ -20,7 +20,20 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         theme = sharedPref.getString("appTheme", "");
         color = sharedPref.getString("appColor", "");
-        Log.i("MAIN_restart",theme+" + "+color);
+        boolean firstRun = sharedPref.getBoolean("FirstRun", true);
+        Log.i("MAIN_start",firstRun+" ");
+        if (firstRun){
+            color="1"; theme="1";
+            DataBaseHelper myDbHelper = new DataBaseHelper(MainActivity.this);
+            try {
+                myDbHelper.createDataBase();
+            } catch (IOException ioe) {
+                throw new Error("Unable to create database");
+            }
+            sharedPref.edit().putString("appTheme", "1").commit();
+            sharedPref.edit().putString("appColor", "1").commit();
+            sharedPref.edit().putBoolean("FirstRun", false).commit();
+        }
         if(theme.compareTo("1")==0 && color.compareTo("1")==0)
             setTheme(R.style.LightOrange);
         else if(theme.compareTo("2")==0 && color.compareTo("1")==0)
@@ -29,18 +42,7 @@ public class MainActivity extends AppCompatActivity {
             setTheme(R.style.LightBlue);
         else if (theme.compareTo("2")==0 && color.compareTo("2")==0)
             setTheme(R.style.DarkBlue);
-        boolean firstRun = sharedPref.getBoolean("FirstRun", true);
-        if (firstRun){
-            DataBaseHelper myDbHelper = new DataBaseHelper(MainActivity.this);
-            try {
-                myDbHelper.createDataBase();
-            } catch (IOException ioe) {
-                throw new Error("Unable to create database");
-            }
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("FirstRun", false);
-            editor.commit();
-        }
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String theme2 = sharedPref.getString("appTheme", "");
         String color2 = sharedPref.getString("appColor", "");
-        if (theme2.equals(theme) || color2.equals(color))
+        if (!theme2.equals(theme) || !color2.equals(color))
             recreate();
     }
 }

@@ -81,7 +81,6 @@ public class ActivityTest extends AppCompatActivity {
         tvScore.setText(itter+" / "+count+"　　　Right: "+pointsR+" / Wrong: "+pointsW);
         tvPrev.setText("");
         tvTest.setText(lettersR.get(randIndex));
-
     }
     public View.OnClickListener Accept = new View.OnClickListener() {
         @Override
