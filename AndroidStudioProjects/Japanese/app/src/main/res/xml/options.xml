@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/listTheme"
+        android:entryValues="@array/listValues"
+        android:key="appTheme"
+        android:summary="Light"
+        android:title="Theme" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/listColor"
+        android:entryValues="@array/listValues"
+        android:key="appColor"
+        android:summary="Orange"
+        android:title="Color" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/listLetters"
+        android:entryValues="@array/listValues"
+        android:key="appLetter"
+        android:summary="Romaji"
+        android:title="Letters" />
+
+</PreferenceScreen>

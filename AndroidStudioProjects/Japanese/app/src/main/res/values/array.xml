@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listTheme">
+        <item>Ligh</item>
+        <item>Dark</item>
+    </string-array>
+    <string-array name="listColor">
+        <item>Orange</item>
+        <item>Blue</item>
+    </string-array>
+    <string-array name="listLetters">
+        <item>Romaji</item>
+        <item>Hiragana</item>
+    </string-array>
+    <string-array name="listValues">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

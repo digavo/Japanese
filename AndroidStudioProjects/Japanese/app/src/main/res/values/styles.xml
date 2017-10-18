@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="LightOrange" parent="Theme.AppCompat.Light" >
+        <item name="colorAccent">@android:color/holo_orange_light</item>
+    </style>
+    <style name="DarkOrange" parent="Theme.AppCompat" >
+        <item name="colorAccent">@android:color/holo_orange_light</item>
+    </style>
+    <style name="LightBlue" parent="Theme.AppCompat.Light" >
+        <item name="colorAccent">@android:color/holo_blue_dark</item>
+    </style>
+    <style name="DarkBlue" parent="Theme.AppCompat" >
+        <item name="colorAccent">@android:color/holo_blue_dark</item>
+    </style>
+</resources>

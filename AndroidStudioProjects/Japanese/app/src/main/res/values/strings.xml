@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Japanese</string>
+    <string name="VocabularyTitle1">Basic vocabulary:</string>
+    <string name="VocabularyTitle2">Locations:</string>
+    <string name="VocabularyTitle3">Things:</string>
+    <string name="VocabularyTitle4">People:</string>
+    <string name="VocabularyTitle5">Life:</string>
+    <string name="test">Test</string>
+    <string name="Menu1">Vocabulary</string>
+    <string name="Menu2">Sentences</string>
+    <string name="Menu3">Particles</string>
+    <string name="Menu4">Hiragana</string>
+</resources>
