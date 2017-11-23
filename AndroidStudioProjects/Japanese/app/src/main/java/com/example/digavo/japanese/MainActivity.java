@@ -30,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException ioe) {
                 throw new Error("Unable to create database");
             }
-            sharedPref.edit().putString("appTheme", "1").commit();
-            sharedPref.edit().putString("appColor", "1").commit();
-            sharedPref.edit().putBoolean("FirstRun", false).commit();
+            sharedPref.edit().putString("appTheme", "1").apply();
+            sharedPref.edit().putString("appColor", "1").apply();
+            sharedPref.edit().putString("appLetter", "1").apply();
+            sharedPref.edit().putBoolean("FirstRun", false).apply();
         }
         if(theme.compareTo("1")==0 && color.compareTo("1")==0)
             setTheme(R.style.LightOrange);

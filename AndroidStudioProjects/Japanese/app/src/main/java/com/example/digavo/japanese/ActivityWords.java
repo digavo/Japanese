@@ -26,16 +26,15 @@ public class ActivityWords extends AppCompatActivity {
     private int[] wordsStatus;
     private Button btEn, btEnJp, btJp;
     private Boolean engShow = true, jpnShow = true;
-    private Intent myIntent;
     private static int result;
-    private int indexColumn;
     private String theme, color, letters;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         letters = sharedPref.getString("appLetter", "");
-        if (letters.compareTo("1")==0) indexColumn = 3;
-        else indexColumn = 4;
+        int indexColumn;
+        if (letters.compareTo("1")==0) indexColumn = 2;
+        else indexColumn = 3;
         theme = sharedPref.getString("appTheme", "");
         color = sharedPref.getString("appColor", "");
         if(theme.compareTo("1")==0 && color.compareTo("1")==0)
@@ -56,7 +55,7 @@ public class ActivityWords extends AppCompatActivity {
         btJp.setBackgroundResource(R.drawable.button);
         btEnJp.setBackgroundResource(R.drawable.button_selected);
         // INTENT -----------
-        myIntent = getIntent();
+        Intent myIntent = getIntent();
         Bundle myBundle = myIntent.getExtras();
         String category = myBundle.getString("category");
         //myIntent.putExtras(myBundle);

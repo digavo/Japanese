@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-smallcaps"
                 android:padding="8dp"
-                android:text="Particles"
+                android:text="@string/menu3"
                 android:textAlignment="center"
                 android:textColor="?attr/colorAccent"
                 android:textSize="18sp" />

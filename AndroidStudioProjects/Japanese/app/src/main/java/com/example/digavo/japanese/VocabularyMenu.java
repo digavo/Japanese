@@ -100,7 +100,7 @@ public class VocabularyMenu extends AppCompatActivity {
                 Log.i("BUTTON",ex.toString());
                 return;
             }
-            if (tag=="") return;
+            if (tag.equals("")) return;
 
             Intent showIntent = new Intent(VocabularyMenu.this, ActivityWords.class);
             Bundle myDataBundle = new Bundle();

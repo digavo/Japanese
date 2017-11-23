@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="English"
+                android:text="@string/Eng"
                 android:textColor="?attr/colorAccent"
                 android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="English-Japanese"
+                android:text="@string/EngJap"
                 android:textColor="?attr/colorAccent"
                 android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="Japanese"
+                android:text="@string/Jap"
                 android:textColor="?attr/colorAccent"
                 android:textStyle="bold" />
 

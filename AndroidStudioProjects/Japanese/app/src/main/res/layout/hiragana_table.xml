@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 <!-- TABLE 1 ___________________ -->
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="?attr/colorAccent" />
     <TableLayout
         android:id="@+id/tab1"
         android:layout_width="match_parent"
@@ -12,10 +16,6 @@
         android:orientation="vertical"
         android:stretchColumns="0,1,2,3,4,5">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/colorAccent" />
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -84,6 +84,9 @@
                 android:textSize="18sp" />
 
         </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </TableLayout>
 
@@ -173,9 +176,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </TableLayout>
 
     <View
@@ -248,9 +248,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </TableLayout>
 
     <View
@@ -324,9 +321,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </TableLayout>
 
 </LinearLayout>

@@ -18,21 +18,15 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.lang.reflect.Array;
+import android.widget.Button;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ActivityGrammar extends AppCompatActivity {
-    private TextView text1, text2, title;
-    private Cursor c=null;
     private Intent myIntent;
     private static int RESULT;
-    private String category, theme, color;
+    private String theme, color;
     private ArrayList<String> hiragana = new ArrayList<String>();
+    private ArrayList<String> romaji = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -48,12 +42,13 @@ public class ActivityGrammar extends AppCompatActivity {
             setTheme(R.style.DarkBlue);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grammar);
-        text1 = (TextView) findViewById(R.id.tvGr1);
-        text2 = (TextView) findViewById(R.id.tvGr2);
-        title = (TextView) findViewById(R.id.tvTitle);
+        TextView text1 = (TextView) findViewById(R.id.tvGr1);
+        TextView text2 = (TextView) findViewById(R.id.tvGr2);
+        TextView title = (TextView) findViewById(R.id.tvTitle);
         // INTENT -----------
         myIntent = getIntent();
         Bundle myBundle = myIntent.getExtras();
+        String category = " ";
         if (myBundle!=null)
             category = myBundle.getString("category");
         else category = "Hiragana";
@@ -62,8 +57,8 @@ public class ActivityGrammar extends AppCompatActivity {
         //setResult(Activity.RESULT_OK, myIntent);
 
         switch (category){
-            case "Particles":
-                title.setText("Particles");
+            case "Particles": //TODO: dodać do bazy
+                title.setText(R.string.menu3);
                 text1.setText("か KA?\nの NO\nは WA\nが GA\nと TO\nから KARA\nまで MADE\nも MO\nに NI\nで DE\n\nを O");
                 text2.setText("question\n" +
                         "possession\n" +
@@ -78,8 +73,8 @@ public class ActivityGrammar extends AppCompatActivity {
                         "direct object of a verb");
 
                 break;
-            case "Sentences":
-                title.setText("Example Sentences");
+            case "Sentences": //TODO: dodać zdania do bazy
+                title.setText(R.string.menu2);
                 text2.setWidth(0);
                 text1.setText("X is Y\nX wa Y des.\n\n"+
                         "X is y?\nX wa Y des ka?\n\n"+
@@ -125,47 +120,29 @@ public class ActivityGrammar extends AppCompatActivity {
                         "I don’t do anything\nWatashi wa nani mo shimasen.\n\n");
                 break;
             case "Hiragana":
-                title.setText("Hiragana");
-                /*title.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent testIntent = new Intent(ActivityGrammar.this, ActivityTest.class);
-                        startActivityForResult(testIntent, 20);
-                    }
-                });*/
-                int h1Size = 0, h2Size = 0, h3Size = 0, h4Size = 0;
+                title.setText(R.string.menu4);
+                int[] size = { 0, 0, 0, 0};
                 // DATABASE ---------
+                Cursor c=null;
                 DataBaseHelper myDbHelper = new DataBaseHelper(ActivityGrammar.this);
                 try {
                     // GET WORDS --------
+                    String[] cat = {"HiraganaA%", "HiraganaB%", "HiraganaC%", "HiraganaD%"};
+                    String pom;
                     myDbHelper.openDataBase();
-                    c=myDbHelper.query("Vocabulary",null, "Category LIKE ?", new String[]{"HiraganaA%"}, null,null, null);
-                    if(c.moveToFirst()) {
-                        do {
-                            hiragana.add(c.getString(4));
-                            h1Size++;
-                        } while (c.moveToNext());
-                    }
-                    c=myDbHelper.query("Vocabulary", null, "Category LIKE ?", new String[]{"HiraganaB%"}, null,null, null);
-                    if(c.moveToFirst()) {
-                        do {
-                            hiragana.add(c.getString(4));
-                            h2Size++;
-                        } while (c.moveToNext());
-                    }
-                    c=myDbHelper.query("Vocabulary", null, "Category LIKE ?", new String[]{"HiraganaC%"}, null,null, null);
-                    if(c.moveToFirst()) {
-                        do {
-                            hiragana.add(c.getString(4));
-                            h3Size++;
-                        } while (c.moveToNext());
-                    }
-                    c=myDbHelper.query("Vocabulary", null, "Category LIKE ?", new String[]{"HiraganaD%"}, null,null, null);
-                    if(c.moveToFirst()) {
-                        do {
-                            hiragana.add(c.getString(4));
-                            h4Size++;
-                        } while (c.moveToNext());
+                    for (int i = 0;i < 4; i++)
+                    {
+                        c=myDbHelper.query("Vocabulary",null, "Category LIKE ?", new String[]{cat[i]}, null,null, null);
+                        if(c.moveToFirst()) {
+                            do {
+                                pom = c.getString(2);
+                                if(pom.contains(" "))
+                                    pom = pom.substring(0, pom.indexOf(" "));
+                                hiragana.add(c.getString(3));
+                                romaji.add(pom);
+                                size[i]++;
+                            } while (c.moveToNext());
+                        }
                     }
                 }
                 catch(SQLException sqle){
@@ -174,161 +151,75 @@ public class ActivityGrammar extends AppCompatActivity {
                 finally {
                     myDbHelper.close();
                 }
-                LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout);
+                LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View layoutView = layoutInflater.inflate(R.layout.hiragana_table,(ViewGroup)layout,false);
                 layout.addView(layoutView,2);
-                String[] H1 = {" ","K","S","T","N","H","M","Y","R","W","*N"};
-                String[] H2 = {"G","Z","D","B","P"};
-                String[] H3 = {"K","S","T","N","H","M","R"};
-                TableLayout ll = (TableLayout) findViewById(R.id.tab1);
-                int rowCount = 0;
-                for (int i = 0; i <h1Size; ) {
+                String[][] H = {{" ","K","S","T","N","H","M","Y","R","W","*N"},
+                        {"G","Z","D","B","P"}, {"K","S","T","N","H","M","R"}, {"G","Z","D","B","P"}};
+                size[1] += size[0]; size[2] += size[1]; size[3] += size[2];
 
-                    TableRow row= new TableRow(this);
-                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                    row.setLayoutParams(lp);
-                    TextView t0 = new TextView(this);
-                    t0.setTextSize(18);
-                    t0.setWidth(0);
-                    t0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    t0.setText(H1[rowCount]);
-                    row.addView(t0);
+                TableLayout[] lay = {(TableLayout) findViewById(R.id.tab1), (TableLayout) findViewById(R.id.tab2),
+                        (TableLayout) findViewById(R.id.tab3), (TableLayout) findViewById(R.id.tab4)};
 
-                    if (i==h1Size-1){
+                for (int s = 0; s<4; s++)
+                {
+                    int rowCount = 0, pom = (s>0)? size[s-1]:0;
+                    for (int i = pom; i < size[s]; )
+                    {
+                        TableRow row = new TableRow(this);
+                        row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT));
+                        row.setPadding(0,8,0,8);
+                        TextView t0 = new TextView(this);
+                        t0.setPadding(8,24,0,0);
+                        t0.setTextSize(18);
+                        t0.setWidth(0);
+                        t0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        t0.setText(H[s][rowCount]);
+                        row.addView(t0);
 
-                        TextView t = new TextView(this);
-                        t.setTextSize(30);
-                        t.setWidth(0);
-                        t.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        t.setText(hiragana.get(i));
-                        row.addView(t);
-                        TableRow.LayoutParams params = (TableRow.LayoutParams)t.getLayoutParams();
-                        params.span = 5;
-                        t.setLayoutParams(params);
-                        ll.addView(row,rowCount+4);
-                        break;
-                    }
-                    for (int j = 0; j < 5; j++){
-                        TextView t1 = new TextView(this);
-                        t1.setTextSize(30);
-                        t1.setWidth(0);
-                        t1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        if (((j==1 || j==3) && H1[rowCount].compareTo("Y")==0) || ((j==1 || j==2 || j==3) && H1[rowCount].compareTo("W")==0)) //to nie pisz nic
-                            t1.setText(" ");
-                        else {
-                            t1.setText(hiragana.get(i));
-                            i++;
+                        if (s==0 && i==size[s]-1) // exception N
+                        {
+                            TextView t = new TextView(this);
+                            t.setTextSize(30);
+                            t.setWidth(0);
+                            t.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            t.setText(hiragana.get(i));
+                            row.addView(t);
+                            TableRow.LayoutParams params = (TableRow.LayoutParams)t.getLayoutParams();
+                            params.span = 5;
+                            t.setLayoutParams(params);
+                            lay[s].addView(row,rowCount+4);
+                            break;
                         }
-                        row.addView(t1);
 
+                        for (int j = 0; j < ((s < 2)? 5 : 3); j++)
+                        {
+                            View buttonView = layoutInflater.inflate(R.layout.button_layout, row,false);
+                            Button txt1 = (Button) buttonView.findViewById(R.id.txt1);
+                            TextView txt2 = (TextView) buttonView.findViewById(R.id.txt2);
+
+                            if (s==0 && (((j==1 || j==3) && H[s][rowCount].compareTo("Y")==0)
+                                     || ((j==1 || j==2 || j==3) && H[s][rowCount].compareTo("W")==0)))
+                            {
+                                txt1.setText(" ");
+                                txt2.setText(" ");
+                            }
+                            else {
+                                txt1.setText(hiragana.get(i));
+                                txt2.setText(romaji.get(i));
+                                i++;
+                            }
+                            row.addView(buttonView);
+                        }
+                        lay[s].addView(row,rowCount+3);
+                        rowCount++;
                     }
-                    ll.addView(row,rowCount+4);
-                    rowCount++;
-                }
-
-                TableLayout l2 = (TableLayout) findViewById(R.id.tab2);
-                rowCount = 0;
-                for (int i = 0; i <h2Size; ) {
-
-                    TableRow row= new TableRow(this);
-                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                    row.setLayoutParams(lp);
-                    TextView t0 = new TextView(this);
-                    t0.setTextSize(18);
-                    t0.setWidth(0);
-                    t0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    t0.setText(H2[rowCount]);
-                    row.addView(t0);
-
-                    for (int j = 0; j < 5; j++){
-                        TextView t1 = new TextView(this);
-                        t1.setTextSize(30);
-                        t1.setWidth(0);
-                        t1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        t1.setText(hiragana.get(h1Size+i));
-                        row.addView(t1);
-                        i++;
-                    }
-
-                    l2.addView(row,rowCount+3);
-                    rowCount++;
-                }
-                TableLayout l3 = (TableLayout) findViewById(R.id.tab3);
-                rowCount = 0;
-                for (int i = 0; i <h3Size; ) {
-
-                    TableRow row= new TableRow(this);
-                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                    row.setLayoutParams(lp);
-                    TextView t0 = new TextView(this);
-                    t0.setTextSize(18);
-                    t0.setWidth(0);
-                    t0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    t0.setText(H3[rowCount]);
-                    row.addView(t0);
-
-                    for (int j = 0; j < 3; j++){
-                        TextView t1 = new TextView(this);
-                        t1.setTextSize(30);
-                        t1.setWidth(0);
-                        t1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        t1.setText(hiragana.get(h1Size+h2Size+i));
-                        row.addView(t1);
-                        i++;
-                    }
-                    l3.addView(row,rowCount+3);
-                    rowCount++;
-                }
-                TableLayout l4 = (TableLayout) findViewById(R.id.tab4);
-                rowCount = 0;
-                for (int i = 0; i <h4Size; ) {
-
-                    TableRow row= new TableRow(this);
-                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                    row.setLayoutParams(lp);
-                    TextView t0 = new TextView(this);
-                    t0.setTextSize(18);
-                    t0.setWidth(0);
-                    t0.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    t0.setText(H2[rowCount]);
-                    row.addView(t0);
-
-                    for (int j = 0; j < 3; j++){
-                        TextView t1 = new TextView(this);
-                        t1.setTextSize(30);
-                        t1.setWidth(0);
-                        t1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        t1.setText(hiragana.get(h1Size+h2Size+h3Size+i));
-                        row.addView(t1);
-                        i++;
-                    }
-                    l4.addView(row,rowCount+3);
-                    rowCount++;
                 }
                 break;
         }
     }
-    private void getWords(String category)
-    {
-        DataBaseHelper myDbHelper = new DataBaseHelper(ActivityGrammar.this);
-        // GET WORDS --------
-        try {
-            myDbHelper.openDataBase();
-            c=myDbHelper.query("Vocabulary", null, "Category = ?", new String[]{category}, null,null, null);
-            if(c.moveToFirst()) {
-                do {
-                    text1.setText(text1.getText().toString()+c.getString(1)+"\n");
-                    text2.setText(text2.getText().toString()+c.getString(3).toLowerCase()+"\n");
-                } while (c.moveToNext());
-            }
-        }catch(SQLException sqle){
-            throw sqle;
-        }
-        finally {
-            myDbHelper.close();
-        }
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -349,26 +240,6 @@ public class ActivityGrammar extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    /*Override
-    public void onBackPressed() {
-        setResult(RESULT, myIntent);
-        super.onBackPressed();
-    }*/
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 10)
-            if (resultCode == RESULT_OK) {
-                RESULT=RESULT_OK;
-                recreate();
-            }
-            else
-                RESULT=RESULT_CANCELED;
-        if (requestCode == 20 && resultCode == RESULT_OK) {
-            category = "Hiragana";
-            //recreate();
-        }
-    }*/
-
     @Override
     protected void onResume() {
         super.onResume();

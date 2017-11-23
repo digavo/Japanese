@@ -50,13 +50,25 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_span="3"
+                    android:layout_span="1"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Test"
-                    android:text="Test"
+                    android:text="@string/vocabularyTest"
                     android:textAlignment="center"
                     android:textAllCaps="false"
+                    android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/bt"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:tag="Cards"
+                    android:text="@string/vocabularyCards"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -69,7 +81,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Basic vocabulary:"
+                android:text="@string/vocabularyTitle1"
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_dark" />
             <TableRow
@@ -84,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Basic"
-                    android:text="Basics"
+                    android:text="@string/vocBasics"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -97,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Adjectives"
-                    android:text="Adjectives"
+                    android:text="@string/vocAdjectives"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textStyle="bold" />
@@ -109,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Verbs"
-                    android:text="Verbs"
+                    android:text="@string/vocVerbs"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textStyle="bold" />
@@ -125,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Expressions"
-                    android:text="Expressions"
+                    android:text="@string/vocExpressions"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -138,10 +150,10 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Numbers"
-                    android:text="Numbers"
+                    android:text="@string/vocNumbers"
                     android:textAlignment="center"
-                    android:textAllCaps="false"
 
+                    android:textAllCaps="false"
                     android:textStyle="bold" />
 
                 <Button
@@ -151,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Time"
-                    android:text="Time"
+                    android:text="@string/vocTime"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -170,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Colors"
-                    android:text="Colors"
+                    android:text="@string/vocColors"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -183,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Directions"
-                    android:text="Directions"
+                    android:text="@string/vocDirections"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -196,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Weather"
-                    android:text="Weather"
+                    android:text="@string/vocWeather"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -214,7 +226,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:text="Locations:"
+                android:text="@string/vocabularyTitle2"
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_dark" />
 
@@ -229,7 +241,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Places"
-                    android:text="Places"
+                    android:text="@string/vocPlaces"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -242,7 +254,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Countries"
-                    android:text="Countries"
+                    android:text="@string/vocCountries"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -269,7 +281,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Things:"
+                android:text="@string/vocabularyTitle3"
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_dark" />
 
@@ -284,7 +296,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Home"
-                    android:text="Home"
+                    android:text="@string/vocHome"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -297,7 +309,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="School"
-                    android:text="School"
+                    android:text="@string/vocSchool"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -310,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Things"
-                    android:text="Other"
+                    android:text="@string/vocOther"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -326,7 +338,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="People:"
+                android:text="@string/vocabularyTitle4"
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_dark" />
 
@@ -341,7 +353,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="People"
-                    android:text="People"
+                    android:text="@string/vocPeople"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -354,7 +366,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Family"
-                    android:text="Family"
+                    android:text="@string/vocFamily"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -367,7 +379,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Body"
-                    android:text="Body"
+                    android:text="@string/vocBody"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -379,10 +391,11 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
                 android:background="?attr/colorAccent" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Life:"
+                android:text="@string/vocabularyTitle5"
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_dark" />
 
@@ -397,7 +410,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Animals"
-                    android:text="Animals"
+                    android:text="@string/vocAnimals"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 
@@ -410,7 +423,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:tag="Plants"
-                    android:text="Plants"
+                    android:text="@string/vocPlants"
                     android:textAlignment="center"
                     android:textAllCaps="false"
 

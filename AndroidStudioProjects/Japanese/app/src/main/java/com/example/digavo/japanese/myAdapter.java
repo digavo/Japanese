@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class myAdapter extends ArrayAdapter {
-    Context context;
-    String[] wordsEn;
-    String[] wordsJp;
-    int[] visible; // 0- En & Jp visible, 1- En visible, 2- Jp visible
-    public myAdapter(Context context, int layout, String[] items, String[] items2, int[] vis) {
+public class myAdapter extends ArrayAdapter { //TODO: change to ViewHolder?
+    private Context context;
+    private String[] wordsEn;
+    private String[] wordsJp;
+    private int[] visible; // 0- En & Jp visible, 1- En visible, 2- Jp visible
+    myAdapter(Context context, int layout, String[] items, String[] items2, int[] vis) {
         super(context, R.layout.words_layout, items);
         this.context = context;
         this.wordsEn = items;
@@ -21,7 +21,8 @@ public class myAdapter extends ArrayAdapter {
         this.visible = vis;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         View row = inflater.inflate(R.layout.words_layout, null);
         TextView label1 = (TextView) row.findViewById(R.id.tvEn);

@@ -1,13 +1,56 @@
 <resources>
     <string name="app_name">Japanese</string>
-    <string name="VocabularyTitle1">Basic vocabulary:</string>
-    <string name="VocabularyTitle2">Locations:</string>
-    <string name="VocabularyTitle3">Things:</string>
-    <string name="VocabularyTitle4">People:</string>
-    <string name="VocabularyTitle5">Life:</string>
-    <string name="test">Test</string>
-    <string name="Menu1">Vocabulary</string>
-    <string name="Menu2">Sentences</string>
-    <string name="Menu3">Particles</string>
-    <string name="Menu4">Hiragana</string>
+
+    <string name="menu1">Vocabulary</string>
+    <string name="menu2">Sentences</string>
+    <string name="menu3">Particles</string>
+    <string name="menu4">Hiragana</string>
+
+    <string name="vocabularyTitle1">Basic vocabulary:</string>
+    <string name="vocabularyTitle2">Locations:</string>
+    <string name="vocabularyTitle3">Things:</string>
+    <string name="vocabularyTitle4">People:</string>
+    <string name="vocabularyTitle5">Life:</string>
+
+    <string name="vocabularyTest">Test</string>
+    <string name="vocabularyCards">Flashcards</string>
+
+    <string name="vocBasics">Basics</string>
+    <string name="vocAdjectives">Adjectives</string>
+    <string name="vocVerbs">Verbs</string>
+    <string name="vocExpressions">Expressions</string>
+    <string name="vocNumbers">Numbers</string>
+    <string name="vocTime">Time</string>
+    <string name="vocColors">Colors</string>
+    <string name="vocDirections">Directions</string>
+    <string name="vocWeather">Weather</string>
+    <string name="vocPlaces">Places</string>
+    <string name="vocCountries">Countries</string>
+    <string name="vocHome">Home</string>
+    <string name="vocSchool">School</string>
+    <string name="vocOther">Other</string>
+    <string name="vocPeople">People</string>
+    <string name="vocFamily">Family</string>
+    <string name="vocBody">Body</string>
+    <string name="vocAnimals">Animals</string>
+    <string name="vocPlants">Plants</string>
+
+    <string name="Eng">English</string>
+    <string name="Jap">English</string>
+    <string name="EngJap">English-Japanese</string>
+
+    <string name="testRight">Right</string>
+    <string name="testWrong">Wrong</string>
+    <string name="testAnswer">Answer</string>
+    <string name="testEnd">END - Accept to begin</string>
+    <string name="testPrevious">Previous</string>
+    <string name="testYou">You</string>
+    <string name="testCorrect">Correct</string>
+    <string name="testIncorrect">Incorrect</string>
+    <string name="testAccept">Accept</string>
+    <string name="testType">Type word</string>
+    <string name="testScore">number / score</string>
+
+
+
 </resources>

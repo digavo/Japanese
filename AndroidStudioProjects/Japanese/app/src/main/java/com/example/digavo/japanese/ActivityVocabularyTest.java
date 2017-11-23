@@ -17,14 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class ActivityVocabularyTest extends AppCompatActivity {
-    private Cursor c=null;
-    private Button btAccept;
     private TextView tvScore, tvTest, tvPrev;
     private EditText etAnswer;
-    private String Answer;
     private String theme, color;
     private static int pointsR, pointsW, itter, count = 20, words, randIndex;
     private static ArrayList<String> wordsH = new ArrayList<String>();
@@ -46,7 +44,7 @@ public class ActivityVocabularyTest extends AppCompatActivity {
         boolean firstRun = sharedPref.getBoolean("FirstRun", true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vocabulary_test);
-        btAccept = (Button) findViewById(R.id.btAccept);
+        Button btAccept = (Button) findViewById(R.id.btAccept);
         tvScore = (TextView) findViewById(R.id.tvResult);
         tvTest = (TextView) findViewById(R.id.tvTest);
         tvPrev = (TextView) findViewById(R.id.tvPrev);
@@ -60,6 +58,7 @@ public class ActivityVocabularyTest extends AppCompatActivity {
         DataBaseHelper myDbHelper = new DataBaseHelper(ActivityVocabularyTest.this);
         try {
             // GET WORDS --------
+            Cursor c=null;
             myDbHelper.openDataBase();
             if (category.compareTo("")==0)
                 c=myDbHelper.query("Vocabulary", null, "Category NOT LIKE ?", new String[]{notCategory+"%"}, null,null, null);
@@ -82,7 +81,8 @@ public class ActivityVocabularyTest extends AppCompatActivity {
         words = wordsH.size();
         randIndex = new Random().nextInt(words);
         pointsR = 0; pointsW = 0; itter = 1;
-        tvScore.setText(itter+" / "+count+"　　　Right: "+pointsR+" / Wrong: "+pointsW);
+        tvScore.setText(String.format(Locale.ENGLISH, "%d / %d　　　%s: %d / %s: %d",
+                itter, count, R.string.testRight, pointsR, R.string.testWrong, pointsW) );
         tvPrev.setText("");
         tvTest.setText(wordsR.get(randIndex));
     }
@@ -95,7 +95,7 @@ public class ActivityVocabularyTest extends AppCompatActivity {
             }
             else //sprawdź
             {
-                Answer = etAnswer.getText().toString().toLowerCase();
+                String Answer = etAnswer.getText().toString().toLowerCase();
                 if (Answer.endsWith(" ") && Answer.length()>1) Answer = Answer.substring(0, Answer.length() - 1);
                 etAnswer.setText("");
                 String userAnswer = (wordsE.get(randIndex)).toLowerCase();
@@ -103,23 +103,26 @@ public class ActivityVocabularyTest extends AppCompatActivity {
                 Log.i("Answer","|"+Answer+"|   |"+ userAnswer+"|");
                 if (Answer.compareTo((wordsE.get(randIndex)).toLowerCase())==0){
                     pointsR++;
-                    tvPrev.setText("Previous: "+wordsR.get(randIndex)+" = "+wordsE.get(randIndex) + "\nYou: "+Answer+" = correct");
+                    tvPrev.setText(String.format(Locale.ENGLISH,"%s: %s = %s\n%s: %s = %s",
+                            R.string.testPrevious,wordsR.get(randIndex),wordsE.get(randIndex),R.string.testYou, R.string.testAnswer, R.string.testCorrect));
                 }
                 else {
-                    tvPrev.setText("Previous: "+wordsR.get(randIndex)+" = "+wordsE.get(randIndex) + "\nYou: "+Answer+" = incorrect");
+                    tvPrev.setText(String.format(Locale.ENGLISH,"%s: %s = %s\n%s: %s = %s",
+                            R.string.testPrevious,wordsR.get(randIndex),wordsE.get(randIndex),R.string.testYou, R.string.testAnswer, R.string.testIncorrect));
                     pointsW++;
                 }
             }
             itter++;
             if (itter > count) {
                 itter = count;
-                tvTest.setText("END - Accept to begin");
+                tvTest.setText(R.string.testEnd);
             }
             else {
                 randIndex = new Random().nextInt(words);
                 tvTest.setText(wordsR.get(randIndex));
             }
-            tvScore.setText(itter+" / "+count+"　　　Right: "+pointsR+" / Wrong: "+pointsW);
+            tvScore.setText(String.format(Locale.ENGLISH, "%d / %d　　　%s: %d / %s: %d",
+                    itter, count, R.string.testRight, pointsR, R.string.testWrong, pointsW) );
 
         }
     };

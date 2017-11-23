@@ -19,21 +19,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase myDataBase;
     private final Context myContext;
 
-    public DataBaseHelper(Context context) {
+    DataBaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.myContext = context;
-        if(android.os.Build.VERSION.SDK_INT >= 17){
-            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
-        }
-        else{
-            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        }
+        DB_PATH =  "/data/data/" + context.getPackageName() + "/databases/";
     }
 
-    public void createDataBase() throws IOException {
+    void createDataBase() throws IOException {
         //Boolean dbExists = doesDatabaseExist(this.myContext,DB_NAME);
         File dbFile = this.myContext.getDatabasePath(DB_NAME);
-        dbFile.delete(); //usuń plik, żeby skopiować tam nowy
+        //dbFile.delete(); //usuń plik, żeby skopiować tam nowy
         this.getReadableDatabase();
         try {
             copyDataBase();
@@ -43,7 +38,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     private static boolean doesDatabaseExist(Context context, String dbName) {
         File dbFile = context.getDatabasePath(dbName);
-        dbFile.delete();
+        //dbFile.delete();
         return dbFile.exists();
     }
 
@@ -58,7 +53,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        return checkDB != null ? true : false;
+        return checkDB != null;
     }
 
     /**
@@ -81,7 +76,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         myInput.close();
     }
 
-    public void openDataBase() throws SQLException {
+    void openDataBase() throws SQLException {
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
@@ -102,7 +97,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy){
+    Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy){
         return myDataBase.query("Vocabulary", null, selection, selectionArgs, null, null, null);
     }
 }
